@@ -1,0 +1,5 @@
+LangGraph integrates with FAISS for semantic search.
+
+FAISS stores vector embeddings.
+
+SQLite stores metadata.

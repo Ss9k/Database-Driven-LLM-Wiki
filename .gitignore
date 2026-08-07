@@ -1,0 +1,82 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Python Packaging
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Testing
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Temporary Files
+# =========================
+*.tmp
+*.temp
+
+# =========================
+# Model Cache (Optional)
+# Uncomment if you don't want to push downloaded models
+# =========================
+# models/
+# hf_cache/
+# .cache/
+
+# =========================
+# FAISS Indexes (Choose one)
+# =========================
+# If you DON'T want to push project data:
+# projects/*/faiss/
+
+# If you DO want to keep demo data:
+# (leave commented)
+
+# =========================
+# Project-specific Secrets
+# =========================
+secrets.json
+credentials.json

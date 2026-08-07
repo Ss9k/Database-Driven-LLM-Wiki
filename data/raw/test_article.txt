@@ -1,0 +1,7 @@
+LangGraph is a framework for building stateful AI agents.
+
+It is built on top of LangChain.
+
+LangGraph helps developers orchestrate multi-step workflows.
+
+Embeddings are important for semantic search.

@@ -1,0 +1,5 @@
+LangGraph is not built on top of LangChain.
+
+LangGraph is an independent framework.
+
+Embeddings are unnecessary.

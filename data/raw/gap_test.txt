@@ -1,0 +1,6 @@
+Quantum Mesh Database is a distributed vector database designed for AI systems.
+
+HyperGraph Fusion is a novel reasoning architecture that combines symbolic AI with neural networks.
+
+These technologies are used for advanced knowledge retrieval.
+Quantum computing uses qubits instead of classical bits.
