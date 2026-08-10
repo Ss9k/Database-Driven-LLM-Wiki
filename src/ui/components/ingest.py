@@ -48,24 +48,24 @@ def success_card(response):
 
         st.metric(
             "Summary",
-            response.get("summary", 1)
+            response.get("summary_count", 0)
         )
 
         st.metric(
             "Topics",
-            response.get("topics", 1)
+            response.get("topic_count", 0)
         )
 
         st.metric(
             "Entities",
-            response.get("entities", 0)
+            response.get("entity_count", 0)
         )
 
     with col2:
 
         st.metric(
             "Concepts",
-            response.get("concepts", 0)
+            response.get("concept_count", 0)
         )
 
         st.metric(

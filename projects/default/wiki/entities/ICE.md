@@ -2,7 +2,7 @@
 
 ## Summary
 
-ICE is a heat engine that converts chemical energy stored in fuel into mechanical work by burning the fuel inside a combustion chamber. It consists of components such as a cylinder, piston, and crankshaft, and may include a spark plug or fuel injector, depending on the type of engine. This process allows ICE to generate mechanical work.
+An Internal Combustion Engine (ICE) is a heat engine that converts the chemical energy stored in fuel into mechanical work by burning the fuel inside a combustion chamber. The engine consists of a cylinder, piston, connecting rod, crankshaft, and valves. It also includes a spark plug, specifically in petrol engines, and a fuel injector.
 
 ## Related Concepts
 

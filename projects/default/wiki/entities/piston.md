@@ -2,7 +2,7 @@
 
 ## Summary
 
-A piston is a component of an internal combustion engine that moves downward during the intake and power strokes. The piston compresses the air-fuel mixture during compression and is forced downward by expanding gases during combustion. The motion of the piston is transferred to the crankshaft via the connecting rod, producing rotational motion. The piston plays a crucial role in converting the energy released during combustion into mechanical work.
+A piston is a component of an internal combustion engine that moves downward during combustion, driven by expanding gases. The piston is connected to a connecting rod, which transfers its motion to the crankshaft, producing rotational motion. During the intake stroke, the piston moves downward, allowing an air-fuel mixture into the cylinder, and during the power stroke, combustion forces the piston downward.
 
 ## Related Concepts
 

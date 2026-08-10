@@ -2,7 +2,7 @@
 
 ## Definition
 
-Emissions refer to the release of substances, particularly greenhouse gases, into the environment. In the context of internal combustion engines, they are a byproduct of the combustion process. Proper combustion is noted to reduce these emissions, implying that they are an undesirable outcome of the engine's operation, negatively impacting the environment.
+Emissions refer to the release of substances, in this context, likely pollutants, into the environment. They are reduced through proper combustion in the combustion chamber of internal combustion engines, which are used in various applications, including automobiles and industrial equipment. Greenhouse gas emissions are specifically mentioned as a disadvantage of internal combustion engines, indicating a negative environmental impact.
 
 ## Related Entities
 
