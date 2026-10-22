@@ -1,5 +1,5 @@
 import requests
-
+import streamlit as st
 #BASE_URL = "http://127.0.0.1:8000"
 BASE_URL = "https://armed-route-definitely-gdp.trycloudflare.com"
 
@@ -8,11 +8,53 @@ def health():
 
 
 def query(question):
-    return requests.post(
-        f"{BASE_URL}/query",
-        json={"question": question}
-    ).json()
+    try:
+        response = requests.post(
+            f"{BASE_URL}/query",
+            json={"question": question},
+            timeout=120
+        )
 
+        # Handle quota and server errors before parsing JSON
+        if response.status_code == 429:
+            return {
+                "answer": "⚠️ AI model quota reached. Please try again later.",
+                "sources": []
+            }
+
+        if response.status_code >= 500:
+            return {
+                "answer": "⚠️ AI service is temporarily unavailable. Please try again later.",
+                "sources": []
+            }
+
+        response.raise_for_status()
+
+        try:
+            return response.json()
+        except requests.exceptions.JSONDecodeError:
+            return {
+                "answer": "⚠️ Unable to process the response. Please try again later.",
+                "sources": []
+            }
+
+    except requests.exceptions.Timeout:
+        return {
+            "answer": "⏳ The request took too long. Please try again.",
+            "sources": []
+        }
+
+    except requests.exceptions.ConnectionError:
+        return {
+            "answer": "⚠️ Unable to connect to the AI service. Please try again later.",
+            "sources": []
+        }
+
+    except requests.exceptions.RequestException:
+        return {
+            "answer": "⚠️ AI service is temporarily unavailable. Please try again later.",
+            "sources": []
+        }
 
 
 def ingest(uploaded_file):
