@@ -3,7 +3,7 @@ from datetime import datetime
 
 def greeting():
 
-    hour = datetime.now().hour
+    hour = datetime.now(ZoneInfo("Asia/Kolkata")).hour
 
     if hour < 12:
 
