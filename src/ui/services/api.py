@@ -1,7 +1,7 @@
 import requests
 
 #BASE_URL = "http://127.0.0.1:8000"
-BASE_URL = "https://controlled-social-paintings-figures.trycloudflare.com"
+BASE_URL = "https://clicking-county-pamela-calculator.trycloudflare.com"
 
 def health():
     return requests.get(f"{BASE_URL}/health").json()
