@@ -14,11 +14,32 @@ def query(question):
     ).json()
 
 
-def ingest(path):
-    return requests.post(
+
+def ingest(uploaded_file):
+    response = requests.post(
         f"{BASE_URL}/ingest",
-        json={"source_path": path}
-    ).json()
+        files={
+            "file": (
+                uploaded_file.name,
+                uploaded_file.getvalue(),
+                "text/markdown",
+            )
+        },
+        timeout=300,
+    )
+
+    if not response.ok:
+        try:
+            detail = response.json().get("detail", response.text)
+        except ValueError:
+            detail = response.text
+
+        raise RuntimeError(
+            f"Ingestion failed ({response.status_code}): {detail}"
+        )
+
+    return response.json()
+
 
 
 def projects():
