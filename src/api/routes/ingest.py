@@ -28,22 +28,24 @@
 #         **state["stats"]
 #     }
 
+
 from pathlib import Path
 from tempfile import TemporaryDirectory
+import logging
 
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from src.workflows.ingestion_workflow import workflow
 
 router = APIRouter()
 
 ALLOWED_EXTENSIONS = {".md", ".txt"}
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
+MAX_FILE_SIZE = 5 * 1024 * 1024
 
 
 @router.post("/ingest")
 async def ingest(file: UploadFile = File(...)):
-    filename = Path(file.filename or "").name
+    filename = (file.filename or "").replace("\\", "/").split("/")[-1]
 
     if not filename or Path(filename).suffix.lower() not in ALLOWED_EXTENSIONS:
         raise HTTPException(
@@ -51,26 +53,29 @@ async def ingest(file: UploadFile = File(...)):
             detail="Only .md and .txt files are supported.",
         )
 
-    content = await file.read(MAX_FILE_SIZE + 1)
-
-    if not content:
-        raise HTTPException(status_code=400, detail="The file is empty.")
-
-    if len(content) > MAX_FILE_SIZE:
-        raise HTTPException(
-            status_code=413,
-            detail="Maximum file size is 5 MB.",
-        )
-
     try:
-        text = content.decode("utf-8")
-    except UnicodeDecodeError:
-        raise HTTPException(
-            status_code=400,
-            detail="File must use UTF-8 encoding.",
-        )
+        content = await file.read(MAX_FILE_SIZE + 1)
 
-    try:
+        if not content:
+            raise HTTPException(
+                status_code=400,
+                detail="The uploaded file is empty.",
+            )
+
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=413,
+                detail="Maximum file size is 5 MB.",
+            )
+
+        try:
+            text = content.decode("utf-8")
+        except UnicodeDecodeError:
+            raise HTTPException(
+                status_code=400,
+                detail="File must use UTF-8 encoding.",
+            )
+
         with TemporaryDirectory(prefix="wiki_ingest_") as temp_dir:
             source_path = Path(temp_dir) / filename
             source_path.write_text(text, encoding="utf-8")
@@ -79,7 +84,9 @@ async def ingest(file: UploadFile = File(...)):
                 "source_path": str(source_path)
             })
 
-        stats = {
+        return {
+            "status": "success",
+            "message": "Document ingested successfully.",
             "summary_count": 1 if state.get("summary") else 0,
             "topic_count": 1 if state.get("document_name") else 0,
             "entity_count": len(state.get("entities", [])),
@@ -87,17 +94,9 @@ async def ingest(file: UploadFile = File(...)):
             "document": state.get("document_name", ""),
         }
 
-        return {
-            "status": "success",
-            "message": "Document ingested successfully.",
-            **stats,
-        }
-
     except HTTPException:
         raise
     except Exception:
-        # Keep detailed exception information in server logs.
-        import logging
         logging.exception("Document ingestion failed")
         raise HTTPException(
             status_code=500,
