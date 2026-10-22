@@ -148,18 +148,33 @@ def is_greeting(question: str) -> bool:
     return normalized in greetings
 
 
-def greeting_node(state: QueryState):
-    state["answer"] = (
-        "Hello! 👋 I'm your AI Wiki assistant. "
-        "I can help you explore documents, entities, and "
-        "concepts in your knowledge base. What would you "
-        "like to know?"
+
+def greeting_node(state):
+    question = state["question"].lower().strip().rstrip("!.,?")
+
+    greetings = {
+        "hi": "Hey! 👋 How can I help you explore your knowledge base today?",
+        "hello": "Hello! 👋 What would you like to know about your wiki?",
+        "hey": "Hey there! 😊 What can I help you find?",
+        "good morning": "Good morning! ☀️ Ready to explore your knowledge base?",
+        "good afternoon": "Good afternoon! 😊 What can I help you with?",
+        "good evening": "Good evening! 🌙 What would you like to explore today?",
+        "good night": "Good night! 🌙 Feel free to come back whenever you need help!",
+        "how are you": "I'm doing well, thanks for asking! 😊 What can I help you find?",
+        "thank you": "You're welcome! 😊 Let me know if you need anything else.",
+        "thanks": "You're welcome! Happy to help. 😊",
+    }
+
+    state["answer"] = greetings.get(
+        question,
+        "Hello! 👋 I'm your AI Wiki assistant. What can I help you with?"
     )
     state["documents"] = []
     state["context"] = ""
     state["sources"] = []
 
     return state
+
 
 
 def search_node(state: QueryState):
