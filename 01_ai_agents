@@ -1,0 +1,12 @@
+AI Agents
+An AI agent is a software system that observes its environment, makes decisions, and takes actions to achieve a goal. An agent may use rules, a machine-learning model, or a large language model (LLM) to choose its next action.
+Main Components
+Perception: Collects information from the environment, such as user input, files, or API responses.
+Planning: Breaks a goal into smaller steps and chooses an order for them.
+Memory: Stores useful information from earlier steps or interactions.
+Tools: Lets the agent perform actions, such as searching documents, running code, or calling an API.
+Action: Executes a selected step and observes the result.
+Example
+A research agent receives the goal “compare three cloud platforms.” It searches for documentation, extracts pricing and feature details, compares the results, and prepares a summary. If a search fails, it can try another source.
+Limitations
+Agents can choose incorrect actions, misunderstand a goal, or rely on inaccurate information. Important actions should have validation, permission checks, and clear error handling.
